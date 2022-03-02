@@ -16,7 +16,7 @@ def signup(request):
         form = forms.SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            raw_password = form.cleaned_data.get('password1')
+            raw_password = form.cleaned_data.get('password')
             email = form.cleaned_data.get('email')
             # authenticate username and password
             user = authenticate(username=email, password=raw_password)

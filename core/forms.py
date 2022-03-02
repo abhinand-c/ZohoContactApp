@@ -4,7 +4,7 @@ from . import models
 
 
 class LoginForm(AuthenticationForm):
-    email = forms.EmailField(max_length=254,
+    username = forms.EmailField(max_length=254,
                                widget=forms.TextInput({
                                    'class': 'form-control',
                                    'placeholder': 'Email'}))
@@ -14,8 +14,8 @@ class LoginForm(AuthenticationForm):
                                    'placeholder': 'Password'}))
 
 
-class SignUpForm(UserCreationForm):
-    password1 = forms.CharField(
+class SignUpForm(forms.ModelForm):
+    password = forms.CharField(
         label="Password",
         widget=forms.PasswordInput({
             'class': 'form-control',
@@ -30,9 +30,21 @@ class SignUpForm(UserCreationForm):
             'secret': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Secret'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
         }
+    
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+        return user
 
 
 class ContactForm(forms.ModelForm):
     class Meta:
         model = models.Contact
         fields = ['name', 'email', 'phone']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Contact Name'}),
+            'phone': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Contact Number'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
+        }
