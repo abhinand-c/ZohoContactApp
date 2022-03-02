@@ -1,0 +1,9 @@
+.env
+*.env
+*.sqlite3
+*.ini
+*.pyc
+__pycache__/
+file_root/
+log_files/
+.vscode
