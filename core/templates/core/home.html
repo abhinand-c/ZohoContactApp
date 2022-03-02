@@ -1,15 +1,42 @@
 {% extends "common/base.html" %}
 {% block page_content %}
 
-<form action="" method="post">
-    {% csrf_token %}
-    {{ contact_form.as_p }}
-    <input type="submit" value="Add Contact" name="contact-submit">
-</form>
+<div class="container col-xl-10 col-xxl-8 px-2 py-5">
+    <div class="row g-lg-5 py-5">
+      <div class="col-md-10 mx-auto col-lg-5">
+        <form action="" method="post" class="p-4 p-md-5 border rounded-3 bg-light">
+            
+        <h1 class="fw-bold lh-1 mb-3">Add Entry</h1>
+            <hr class="my-4">
+            {% csrf_token %}
+            {{ contact_form.as_p }}
+          <button type="submit" name="contact-submit" class="w-100 btn btn-lg btn-primary">Save</button>
+        </form>
+      </div>
+      <div class="col-lg-7 text-center text-lg-start">
+        <h1 class="display-4 fw-bold lh-1 mb-3"> My Contacts</h1>
+        <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for contact in contact_list %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.phone }}</td>
+            <td>{{ contact.email }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
 
-    {% for contact in contact_list %}
-        {{ contact.name }} - 
-        {{ contact.phone }} - 
-        {{ contact.email }} \
-    {% endfor %}
 {% endblock %}
