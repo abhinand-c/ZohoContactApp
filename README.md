@@ -33,3 +33,11 @@ DEBUG=True
 SECRET_KEY=dummysecretkey12312412
 
 ```
+
+
+## Screenshots
+![Signin](docs/signin.png)
+
+![Signup](docs/signup.png)
+
+![Home](docs/home.png)
