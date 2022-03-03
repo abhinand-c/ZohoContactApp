@@ -17,6 +17,11 @@ Sample app developed for Zoho test
 7. Run server using `python manage.py runserver 80`
 
 
+### To create Root/Superuser
+1. In project root, run 
+    `python manage.py createsuperuser`
+   and add details of the superuser
+2. Visit `localhost/admin` (ie, /admin from root location) to access admin panel
 
 #### Dummy .env file
 
